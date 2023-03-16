@@ -25,7 +25,8 @@ jobs:
         with:
           name: release-android-app
           path: build/app/outputs/flutter-apk/app-release.apk
-      
+      - name: Zip APK file
+        run: zip -j app-release.zip build/app/outputs/flutter-apk/app-release.apk
       - uses: dawidd6/action-send-mail@v2
         if: always()
         with:
@@ -38,4 +39,4 @@ jobs:
           to: truongluan998@gmail.com, binhp1999@gmail.com
           from: ChatGPT  
           attachments: |
-            build/app/outputs/flutter-apk/app-release.apk
+            app-release.zip
