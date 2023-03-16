@@ -30,10 +30,12 @@ jobs:
         if: always()
         with:
           server_address: smtp.gmail.com
-          server_port: 465
+          server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: ${{ github.repository }} ${{ github.job }} is ${{ job.status }}
-          body: 'Download artifacts at: https://github.com/${{ github.repository }}/runs/${{ github.run_id }}/artifacts/release-android-app?raw=true'
+          body: 'Build complete'
           to: truongluan998@gmail.com, binhp1999@gmail.com
           from: ChatGPT  
+          attachments: |
+            build/app/outputs/flutter-apk/app-release.apk
