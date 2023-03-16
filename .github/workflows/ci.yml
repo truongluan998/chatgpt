@@ -25,19 +25,6 @@ jobs:
         with:
           name: release-android-app
           path: build/app/outputs/flutter-apk/app-release.apk
-      - name: Install @actions/artifact
-        run: npm install @actions/artifact
-      
-      - name: Get artifacts download URL
-        id: download_url
-        run: |
-          mkdir artifacts
-          cd artifacts
-          # Download the artifact using the actions/download-artifact@v2 action
-          npx @actions/artifact download -n release-android-app -r ${{ github.repository }} -c ${{ github.ref }} -d .
-          # Get the download URL for the artifact
-          echo "::set-output name=url::$(node -e 'console.log(require(`./release-android-app`).archive_download_url)')"
-
       
       - uses: dawidd6/action-send-mail@v2
         if: always()
@@ -47,8 +34,6 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: ${{ github.repository }} ${{ github.job }} is ${{ job.status }}
-          body: |
-            ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-            Link: ${{ steps.download_url.outputs.url }}
+          body: 'Download artifacts at: https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/release-android-app'
           to: truongluan998@gmail.com, binhp1999@gmail.com
           from: ChatGPT  
