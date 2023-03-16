@@ -34,9 +34,9 @@ jobs:
           mkdir artifacts
           cd artifacts
           # Download the artifact using the actions/download-artifact@v2 action
-          npx @actions/artifact download -n my-artifact -r ${{ github.repository }} -c ${{ github.ref }} -d .
+          npx @actions/artifact download -n release-android-app -r ${{ github.repository }} -c ${{ github.ref }} -d .
           # Get the download URL for the artifact
-          echo "::set-output name=url::$(node -e 'console.log(require(`./my-artifact`).archive_download_url)')"
+          echo "::set-output name=url::$(node -e 'console.log(require(`./release-android-app`).archive_download_url)')"
 
       
       - uses: dawidd6/action-send-mail@v2
