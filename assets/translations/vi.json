@@ -1,0 +1,26 @@
+{
+  "full_name": "Họ và tên",
+  "email": "Email",
+  "phone": "Số điện thoại",
+  "password": "Mật khẩu",
+  "login": "Đăng nhập",
+  "register": "Đăng Ký",
+  "forgot_pass": "Quên mật khẩu",
+  "or_sign_up": "hoặc ĐĂNG KÝ",
+  "or_sign_in": "hoặc ĐĂNG NHẬP",
+  "email_already_exists": "Email đã tồn tại",
+  "sign_up_success": "Đăng ký tài khoản thành công",
+  "default_title_appbar": "ChatGPT",
+  "hint_text_input_chat_page": "Nhập",
+  "chat_with_gpt": "TRÒ CHUYỆN VỚI GPT NGAY!",
+  "common_error": "Có lỗi xảy ra. Vui lòng thử lại",
+  "about_me": "Về tôi",
+
+  "very_low_battery": "Pin dưới 10%",
+  "low_battery": "Pin dưới 20%",
+  "high_battery": "Pin 80%",
+  "full_battery": "Pin đầy",
+
+  "common_lost_internet": "Mất kết nối mạng",
+  "common_internet_connected": "Đã kết nối lại mạng"
+}

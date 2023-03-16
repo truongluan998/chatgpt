@@ -1,0 +1,4 @@
+{
+    "baseURL": "https://api.openai.com/v1",
+    "secretKey" :"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"
+}
