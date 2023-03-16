@@ -34,6 +34,6 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: ${{ github.repository }} ${{ github.job }} is ${{ job.status }}
-          body: 'Download artifacts at: https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/release-android-app'
+          body: 'Download artifacts at: https://github.com/${{ github.repository }}/runs/${{ github.run_id }}/artifacts/release-android-app?raw=true'
           to: truongluan998@gmail.com, binhp1999@gmail.com
           from: ChatGPT  
