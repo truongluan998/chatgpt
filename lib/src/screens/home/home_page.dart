@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +25,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   final TextEditingController _textEditingController = TextEditingController();
   final ScrollController _listScrollController = ScrollController();
   final FocusNode _focusNode = FocusNode();
@@ -55,15 +58,15 @@ class _HomePageState extends State<HomePage> {
     _listScrollController.addListener(_scrollListener);
   }
 
-   _scrollListener() async {
-     var preventCall = false;
+  _scrollListener() async {
+    var preventCall = false;
 
-     if (_listScrollController.position.pixels == _listScrollController.position.maxScrollExtent) {
-       if (!preventCall) {
-         preventCall = true;
-         await _messageCubit.loadMessages().then((_) => preventCall = false);
-       }
-     }
+    if (_listScrollController.position.pixels == _listScrollController.position.maxScrollExtent) {
+      if (!preventCall) {
+        preventCall = true;
+        await _messageCubit.loadMessages().then((_) => preventCall = false);
+      }
+    }
   }
 
   @override
@@ -71,11 +74,7 @@ class _HomePageState extends State<HomePage> {
     final textTheme = Theme.of(context).textTheme;
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => _messageCubit
-            ..loadMessages(isLoadFirstTime : true)
-            ..listenToMessages(),
-        ),
+        BlocProvider(create: (_) => _messageCubit),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -278,5 +277,11 @@ class _HomePageState extends State<HomePage> {
     _listScrollController.dispose();
     _focusNode.dispose();
     super.dispose();
+  }
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) async {
+    await _messageCubit.loadMessages(isLoadFirstTime: true);
+    await _messageCubit.listenToMessages();
   }
 }

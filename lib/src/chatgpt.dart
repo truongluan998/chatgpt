@@ -42,9 +42,10 @@ class _ChatGPTState extends State<ChatGPT> with AfterLayoutMixin<ChatGPT> {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => _checkBatteryCubit..checkBattery(),
-        child: BlocListener<CheckBatteryCubit, CheckBatteryState>(
-          listener: (context, state) {
+        create: (context) => _checkBatteryCubit,
+        child: BlocListener(
+          bloc: _checkBatteryCubit,
+          listener: (context, CheckBatteryState state) {
             state.maybeWhen(
               veryLowBattery: () => _showToastUtils.showToast('very_low_battery'.tr()),
               lowBattery: () => _showToastUtils.showToast('low_battery'.tr()),
@@ -89,6 +90,7 @@ class _ChatGPTState extends State<ChatGPT> with AfterLayoutMixin<ChatGPT> {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
     _checkConnectivity();
+    await _checkBatteryCubit.checkBattery();
   }
 
   @override
