@@ -34,7 +34,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   MockAuthService mockAuthService;
   final mockFirebaseAuth = MockFirebaseAuth();
-  final authServiceImpl = AuthServiceImpl(firebaseAuth: mockFirebaseAuth);
+  final authServiceImpl = AuthServiceImpl(mockFirebaseAuth);
   late MockCollectionReference mockCollectionReference;
   late MockFirebaseFirestoreDocumentReference mockFirebaseFirestoreDocumentReference;
   late DocumentSnapshot mockDocumentSnapshot;
