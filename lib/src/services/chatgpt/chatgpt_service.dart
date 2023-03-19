@@ -10,25 +10,23 @@ class ChatGPTService extends BaseService {
   ChatGPTService(super.restUtils);
 
   Future<ListModelResponse> getAllModel() async => rest.request(
-      '/models',
-      Method.get,
-    );
+        '/models',
+        Method.get,
+      );
 
   Future<ChatGPTResponse> chatWithChatGPT({
     required String prompt,
-    String? model,
-    double? temperature,
-    int? maxTokens,
-  }) async {
-    final request = ChatGPTRequest()
-      ..maxTokens = maxTokens ?? AppConstants.defaultMaxTokens
-      ..model = model ?? AppConstants.defaultModel
-      ..temperature = temperature ?? AppConstants.defaultTemperature
-      ..prompt = prompt;
-    return rest.request(
-      '/completions',
-      Method.post,
-      request: request,
-    );
-  }
+    String? model = AppConstants.defaultModel,
+    double? temperature = AppConstants.defaultTemperature,
+    int? maxTokens = AppConstants.defaultMaxTokens,
+  }) async =>
+      rest.request(
+        '/completions',
+        Method.post,
+        request: ChatGPTRequest()
+          ..prompt = prompt
+          ..maxTokens = maxTokens
+          ..model = model
+          ..temperature = temperature,
+      );
 }
