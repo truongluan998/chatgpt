@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class AppConstants {
   static const localizationAssetPath = 'assets/translations';
@@ -13,6 +14,8 @@ class AppConstants {
   static const String fourK = '4K';
   static const String keyValueIconOne = 'icon1';
   static const String keyValueIconTwo = 'icon2';
+
+  static const String androidChannelNotificationId = 'high_importance_channel';
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
@@ -91,4 +94,13 @@ class FirestoreConstants {
   static const timestamp = 'timestamp';
   static const content = 'content';
   static const botSender = 'bot';
+}
+
+class NotificationChannel {
+  static const androidChannel = AndroidNotificationChannel(
+    AppConstants.androidChannelNotificationId,
+    'High Importance Notifications',
+    description: 'This channel is used for important notifications.',
+    importance: Importance.high,
+  );
 }
