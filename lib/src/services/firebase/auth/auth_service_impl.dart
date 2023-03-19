@@ -8,7 +8,7 @@ import 'auth_service.dart';
 class AuthServiceImpl extends AuthService {
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
-  AuthServiceImpl({required firebase_auth.FirebaseAuth? firebaseAuth})
+  AuthServiceImpl(firebase_auth.FirebaseAuth? firebaseAuth)
       : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
 
   final userRef = FirebaseFirestore.instance.collection('Users');

@@ -5,7 +5,7 @@ import 'battery/check_battery_cubit.dart';
 import 'chat/chat_cubit.dart';
 import 'connectivity/connectivity_cubit.dart';
 
-class CubitDependencies {
+class BlocDependencies {
   static void init(GetIt injector) {
     injector.registerFactory(() => AuthenticationCubit(injector()));
     injector.registerFactory(

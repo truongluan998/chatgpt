@@ -5,6 +5,8 @@ import 'package:rest_utils/rest_utils.dart';
 import 'chatgpt/chatgpt_service.dart';
 import 'firebase/auth/auth_service.dart';
 import 'firebase/auth/auth_service_impl.dart';
+import 'firebase/fcm/nofitication_service.dart';
+import 'firebase/fcm/notification_service_imp.dart';
 
 class ServiceDependencies {
   static void init(GetIt injector) {
@@ -15,7 +17,12 @@ class ServiceDependencies {
     );
     injector.registerLazySingleton<AuthService>(
       () => AuthServiceImpl(
-        firebaseAuth: FirebaseAuth.instance,
+        injector(),
+      ),
+    );
+    injector.registerLazySingleton<NotificationService>(
+      () => NotificationServiceImp(
+        injector(),
       ),
     );
   }
