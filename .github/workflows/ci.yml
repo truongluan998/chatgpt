@@ -4,6 +4,20 @@ on:
     brand:
       - develop
 jobs:
+  code-analysis-and-testing:
+    name: Code analysis and testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.7'
+          channel: stable
+      - run: flutter clean
+      - run: flutter pub get
+      - run: flutter test
+
   chatgpt_build:
     name: Build ChatGPT
     runs-on: ubuntu-latest
