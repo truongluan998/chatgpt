@@ -63,7 +63,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   Future<int> getSizeMessageSnapshot() => _databaseReference
       .collection(FirestoreConstants.pathMessageCollection)
-      .doc(_currentUser.currentUser?.uid ?? '')
+      .doc(_currentUser.currentUser?.uid ?? '0')
       .collection(FirestoreConstants.chatWithGPT)
       .orderBy(FirestoreConstants.timestamp, descending: true)
       .get()
