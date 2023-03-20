@@ -4,7 +4,7 @@ import '../../../models/auth/user_model.dart';
 abstract class AuthService {
   Future<UserModel?> getCurrentUser();
 
-  Future<void> signInWithEmailAndPassword({
+  Future<bool> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
@@ -16,5 +16,5 @@ abstract class AuthService {
     required String phone,
   });
 
-  Future<void> logout();
+  Future<bool> logout();
 }

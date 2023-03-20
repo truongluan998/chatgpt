@@ -4,8 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_project/src/models/auth/user_model.dart';
 import 'package:mock_project/src/services/firebase/auth/auth_service.dart';
 import 'package:mock_project/src/services/firebase/auth/auth_service_impl.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+
 
 import 'package:mocktail/mocktail.dart';
 
@@ -13,9 +15,11 @@ import '../../mock_data/firebase_cloud.dart';
 
 class MockAuthService extends Mock implements AuthService {}
 
-class MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
+class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
-class MockFirebaseUser extends Mock implements firebase_auth.User {}
+class MockFirebaseUser extends Mock implements User {}
+
+class UserCredentialMock extends Mock implements UserCredential {}
 
 class MockCollectionReference extends Mock
     implements CollectionReference<Map<String, dynamic>> {}
@@ -26,8 +30,9 @@ class MockDocumentReferenceMap extends Mock
 class MockFirebaseFirestoreDocumentReference extends Mock
     implements DocumentReference {}
 
-class MockDocumentSnapshot extends Mock implements DocumentSnapshot{}
+class MockDocumentSnapshot extends Mock implements DocumentSnapshot {}
 
+class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
 
 Future<void> main() async {
   setupFirebaseAuthMocks();
@@ -36,18 +41,24 @@ Future<void> main() async {
   final mockFirebaseAuth = MockFirebaseAuth();
   final authServiceImpl = AuthServiceImpl(mockFirebaseAuth);
   late MockCollectionReference mockCollectionReference;
-  late MockFirebaseFirestoreDocumentReference mockFirebaseFirestoreDocumentReference;
+  late MockFirebaseFirestoreDocumentReference
+      mockFirebaseFirestoreDocumentReference;
   late DocumentSnapshot mockDocumentSnapshot;
-
+  late MockFirebaseFirestore mockFirebaseFirestore;
 
   setUpAll(() async {
-    mockFirebaseFirestoreDocumentReference = MockFirebaseFirestoreDocumentReference();
+    mockFirebaseFirestore = MockFirebaseFirestore();
+    mockFirebaseFirestoreDocumentReference =
+        MockFirebaseFirestoreDocumentReference();
     mockCollectionReference = MockCollectionReference();
     mockAuthService = MockAuthService();
     mockDocumentSnapshot = MockDocumentSnapshot();
     registerFallbackValue(mockCollectionReference);
+    registerFallbackValue(mockFirebaseFirestore);
     registerFallbackValue(mockFirebaseFirestoreDocumentReference);
     registerFallbackValue(mockDocumentSnapshot);
+    registerFallbackValue(mockFirebaseAuth);
+    registerFallbackValue(MockFirebaseAuth);
     registerFallbackValue(MockCollectionReference);
     registerFallbackValue(MockDocumentReferenceMap);
     registerFallbackValue(MockFirebaseFirestoreDocumentReference);
@@ -77,53 +88,58 @@ Future<void> main() async {
     final user = await authServiceImpl.getCurrentUser();
     expect(user, isNull);
   });
-  // test('getCurrentUser returns user when user is logged in and has a profile in the database', () async {
-  //     final mockUser = MockFirebaseUser();
-  //     final mockDocumentReferentMap = MockDocumentReferenceMap();
-  //     final userData = {
-  //       'id': 'user_id',
-  //       'name': 'John Doe',
-  //       'email': 'john.doe@example.com',
-  //       'phone': '1234567890',
-  //       'photo': 'https://example.com/photo.jpg',
-  //       'password': 'password',
-  //     };
-  //     final instance = FakeFirebaseFirestore();
-  //     await instance.collection('Users').add({
-  //       'id': 'user_id',
-  //       'name': 'John Doe',
-  //       'email': 'john.doe@example.com',
-  //       'phone': '1234567890',
-  //       'photo': 'https://example.com/photo.jpg',
-  //       'password': 'password',
-  //     });
-  //     final snapshot = await instance.collection('Users').get();
-  //     final mockDocumentReferenceUser = instance.collection('Users');
-  //     final getUser = await mockDocumentReferenceUser.doc('user_id').get();
 
+  test('should return true if user is successfully created', () async {
+    final mockUser = MockFirebaseUser();
+    const email = 'test@test.com';
+    const password = 'password';
+    const name = 'Test User';
+    const phone = '1234567890';
 
-  //     when(() => mockFirebaseAuth.currentUser).thenReturn(mockUser);
-  //     when(() => mockUser.uid).thenReturn('user_id');
-  //     when(() => mockCollectionReference.doc('user_id').get())
-  //       .thenAnswer((realInvocation) => Future.value(getUser));
-  //     // when(() => mockDocumentSnapshot.get('user_id')).thenReturn(mockDocumentSnapshot);
-  //     // when(() => mockCollectionReference.doc('user_id')).thenReturn(mockDocumentReferentMap);
-  //     // when(() => mockDocumentReferentMap.get())
-  //     //   .thenAnswer((realInvocation) => Future.value(getUser));
-  //     // when(() => mockDocumentSnapshot.data()).thenReturn(userData);
-  //     // when(() => FirebaseFirestore.instance.collection('Users')).thenReturn(mockCollectionReference);
+    final userCredentialMock = UserCredentialMock();
+    when(() => mockFirebaseAuth.fetchSignInMethodsForEmail(email))
+        .thenAnswer((_) => Future.value([]));
 
-  //     final user = await authServiceImpl.getCurrentUser();
+    when(() => mockFirebaseAuth.createUserWithEmailAndPassword(
+            email: email, password: password))
+        .thenAnswer((_) => Future.value(userCredentialMock));
+    when(() => userCredentialMock.user).thenReturn(mockUser);
+    when(() => mockUser.uid).thenReturn('123123');
+    // verify(mockCollectionReference.doc(mockUser.uid).set(any()) as Function());
 
-  //     expect(user, isNotNull);
-  //     expect(user!.id, equals('user_id'));
-  //     expect(user.name, equals('John Doe'));
-  //     expect(user.email, equals('john.doe@example.com'));
-  //     expect(user.phone, equals('1234567890'));
-  //     expect(user.photo, equals('https://example.com/photo.jpg'));
-  //     expect(user.password, equals('password'));
-  //   });
+    final result = await authServiceImpl.signUp(
+        email: email, password: password, name: name, phone: phone);
 
+    // Assert
+    expect(result, true);
+  });
+
+  test('should return true if user is login ', () async {
+    final mockUser = MockFirebaseUser();
+    const email = 'test@test.com';
+    const password = 'password';
   
-  
+
+    final userCredentialMock = UserCredentialMock();
+    when(() => mockFirebaseAuth.fetchSignInMethodsForEmail(email))
+        .thenAnswer((_) => Future.value([]));
+
+    when(() => mockFirebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password))
+        .thenAnswer((_) => Future.value(userCredentialMock));
+    when(() => userCredentialMock.user).thenReturn(mockUser);
+
+    final result = await authServiceImpl.signInWithEmailAndPassword(
+        email: email, password: password);
+
+    // Assert
+    expect(result, isNotNull);
+  });
+
+  test('should return true if user is logout ', () async {
+    when(() => mockFirebaseAuth.signOut())
+        .thenAnswer((_) => Future.value(true));
+    final result = await authServiceImpl.logout();
+    expect(result, isNotNull);
+  });
 }

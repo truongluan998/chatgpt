@@ -92,8 +92,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
             ),
             IconButton(
               icon: const Icon(Icons.logout),
-              onPressed: () {
-                _authService.logout();
+              onPressed: () async {
+                if(await _authService.logout())
                 context.router.replaceAll([const SignInRoute()]);
               },
             ),
