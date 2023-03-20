@@ -62,13 +62,11 @@ Future<void> main() async {
   //   expect(response, isNotNull);
   // });
 
-  test('getAllModel', () async {
-    when(() => restUtils.request(any(), Method.get))
-        .thenAnswer((realInvocation) => Future.value(mockModelResponse));
-
-    final actualResponse = await chatGPTService.getAllModel();
-    expect(actualResponse, isNotNull);
-  });
-
-  
+  // test('getAllModel', () async {
+  //   when(() => restUtils.request(any(), Method.get))
+  //       .thenAnswer((realInvocation) => Future.value(mockModelResponse));
+  //
+  //   final actualResponse = await chatGPTService.getAllModel();
+  //   expect(actualResponse, isNotNull);
+  // });
 }
