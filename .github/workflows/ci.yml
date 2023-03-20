@@ -4,29 +4,8 @@ on:
     brand:
       - develop
 jobs:
-  code-analysis-and-testing:
-    if: false
-    name: Code analysis and testing
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.7.7'
-          channel: stable
-      - name: Get pub dependencies
-        run: flutter pub get
-      - name: Flutter analyze
-        run: flutter analyze
-      - name: Flutter test
-        run: flutter test
-
-  chatgot_build:
+  chatgpt_build:
     name: Build ChatGPT
-    needs: code-analysis-and-testing.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
