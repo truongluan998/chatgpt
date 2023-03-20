@@ -12,8 +12,6 @@ Future<void> main() async {
 
   late CheckBatteryCubit checkBatteryCubit;
 
-  final exception = Exception('Some error');
-
   setUp(() {
     batteryImp = MockBatteryPluginImp();
     checkBatteryCubit = CheckBatteryCubit(batteryImp);

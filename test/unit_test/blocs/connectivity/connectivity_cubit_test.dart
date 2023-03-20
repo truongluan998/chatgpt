@@ -22,8 +22,7 @@ Future<void> main() async {
   blocTest<ConnectivityCubit, ConnectivityState>(
     'emits connectivityConnect state when have ethernet',
     build: () {
-      when(() => connectivityPluginImp.checkConnectivity())
-          .thenAnswer((_) => Future.value(ConnectivityResult.mobile));
+      when(() => connectivityPluginImp.checkConnectivity()).thenAnswer((_) => Future.value(ConnectivityResult.mobile));
       return connectivityCubit;
     },
     act: (cubit) => cubit.checkConnectivity(),
@@ -36,14 +35,26 @@ Future<void> main() async {
   blocTest<ConnectivityCubit, ConnectivityState>(
     'emits connectivityLost state when lost internet',
     build: () {
-      when(() => connectivityPluginImp.checkConnectivity())
-          .thenAnswer((_) => Future.value(ConnectivityResult.none));
+      when(() => connectivityPluginImp.checkConnectivity()).thenAnswer((_) => Future.value(ConnectivityResult.none));
       return connectivityCubit;
     },
     act: (cubit) => cubit.checkConnectivity(),
     expect: () => [
       const ConnectivityState.connectivityInitial(),
       const ConnectivityState.connectivityLost(),
+    ],
+  );
+
+  blocTest<ConnectivityCubit, ConnectivityState>(
+    'emits connectivityLost state when throw Exception',
+    build: () {
+      when(() => connectivityPluginImp.checkConnectivity()).thenThrow(Exception());
+      return connectivityCubit;
+    },
+    act: (cubit) => cubit.checkConnectivity(),
+    expect: () => [
+      const ConnectivityState.connectivityInitial(),
+      const ConnectivityState.connectivityError(message: 'Exception'),
     ],
   );
 }

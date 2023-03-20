@@ -8,7 +8,8 @@ import 'auth_service.dart';
 class AuthServiceImpl extends AuthService {
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
-  AuthServiceImpl(firebase_auth.FirebaseAuth? firebaseAuth) : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
+  AuthServiceImpl(firebase_auth.FirebaseAuth? firebaseAuth)
+      : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
 
   final userRef = FirebaseFirestore.instance.collection('Users');
 
@@ -39,23 +40,23 @@ class AuthServiceImpl extends AuthService {
   }) async {
     final checkEmail = await _firebaseAuth.fetchSignInMethodsForEmail(email);
     if (checkEmail.isEmpty) {
-      final userCredential =  await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-      try{
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      try {
         await userRef.doc(userCredential.user?.uid ?? '').set(
-            UserModel(
-              id: userCredential.user?.uid ?? '',
-              email: email,
-              name: name,
-              phone: phone,
-              photo: userCredential.user?.photoURL ?? '',
-              password: password,
-            ).toJson(),
-      );
+              UserModel(
+                id: userCredential.user?.uid ?? '',
+                email: email,
+                name: name,
+                phone: phone,
+                photo: userCredential.user?.photoURL ?? '',
+                password: password,
+              ).toJson(),
+            );
       } on Exception catch (e) {
-      if (kDebugMode) {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
-    }
       return true;
     } else {
       return false;
@@ -67,7 +68,7 @@ class AuthServiceImpl extends AuthService {
     var isSuccess = false;
     await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password).whenComplete(
           () => isSuccess = true,
-    );
+        );
     return isSuccess;
   }
 
@@ -75,7 +76,8 @@ class AuthServiceImpl extends AuthService {
   Future<bool> logout() async {
     var isSuccess = false;
     await _firebaseAuth.signOut().whenComplete(
-          () => isSuccess = true,);
+          () => isSuccess = true,
+        );
     return isSuccess;
   }
 }

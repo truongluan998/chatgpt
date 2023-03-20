@@ -73,7 +73,6 @@ dev_dependencies:
   fake_cloud_firestore: ^2.4.1+1
   bloc_test: ^9.1.1
   firebase_auth_mocks: ^0.11.0
-  bloc_test: ^9.1.1
 
 flutter_native_splash:
   color: "#ffffff"
