@@ -29,15 +29,20 @@ class _ChatGPTState extends State<ChatGPT> with AfterLayoutMixin<ChatGPT> {
   final _checkBatteryCubit = AppDependencies.injector.get<CheckBatteryCubit>();
 
   StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  bool showResultConnectivityFirstTime = true;
 
   void _checkConnectivity() {
-    _connectivitySubscription = _connectivityImp.onConnectivityChanged().listen(
-      (event) async {
-        event != ConnectivityResult.none
-            ? await _showToastUtils.showToast('common_internet_connected'.tr())
-            : await _showToastUtils.showToast('common_lost_internet'.tr());
-      },
-    );
+    if (!showResultConnectivityFirstTime) {
+      _connectivitySubscription = _connectivityImp.onConnectivityChanged().listen(
+        (event) async {
+          event != ConnectivityResult.none
+              ? await _showToastUtils.showToast('common_internet_connected'.tr())
+              : await _showToastUtils.showToast('common_lost_internet'.tr());
+        },
+      );
+    } else {
+      showResultConnectivityFirstTime = false;
+    }
   }
 
   @override

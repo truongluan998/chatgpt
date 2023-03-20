@@ -8,13 +8,7 @@ import 'connectivity/connectivity_cubit.dart';
 class BlocDependencies {
   static void init(GetIt injector) {
     injector.registerFactory(() => AuthenticationCubit(injector()));
-    injector.registerFactory(
-      () => ChatCubit(
-        injector(),
-        injector(),
-        injector(),
-      ),
-    );
+    injector.registerFactory(() => ChatCubit(injector(), injector(), injector()));
     injector.registerFactory(() => CheckBatteryCubit(injector()));
     injector.registerFactory(() => ConnectivityCubit(injector()));
   }

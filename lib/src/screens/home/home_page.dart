@@ -15,8 +15,9 @@ import '../../routes/app_router.dart';
 import '../../services/firebase/auth/auth_service.dart';
 import '../../theme/app_color.dart';
 import '../../theme/app_theme.dart';
-import '../widgets/app_message_text.dart';
+import '../widgets/app_message_widget.dart';
 import '../widgets/app_text_form_field.dart';
+import '../widgets/avatar_chat_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              MessageWidget(
+                              AppMessageWidget(
                                 textColor: AppColor.whiteColor,
                                 backgroundColor: AppColor.primaryColor,
                                 content: _messages[index].text!,
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                 time: _messages[index].timestamp!,
                                 timeColor: AppColor.whiteColor,
                               ),
-                              AvartarChatWidget(
+                              AvatarChatWidget(
                                 checkLastMessage: _isLastMessageRight(
                                   _messages,
                                   index,
@@ -164,14 +165,14 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              AvartarChatWidget(
+                              AvatarChatWidget(
                                 checkLastMessage: _isLastMessageLeft(
                                   _messages,
                                   index,
                                   _userID,
                                 ),
                               ),
-                              MessageWidget(
+                              AppMessageWidget(
                                 backgroundColor: AppColor.whiteColor,
                                 textColor: AppColor.textBlackColor,
                                 content: _messages[index].text!,
