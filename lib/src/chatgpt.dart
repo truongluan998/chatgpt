@@ -36,7 +36,7 @@ class _ChatGPTState extends State<ChatGPT> with AfterLayoutMixin<ChatGPT> {
       _connectivitySubscription = _connectivityImp.onConnectivityChanged().listen(
         (event) async {
 
-          ///
+          ////
           event != ConnectivityResult.none
               ? await _showToastUtils.showToast('common_internet_connected'.tr())
               : await _showToastUtils.showToast('common_lost_internet'.tr());

@@ -26,7 +26,7 @@ jobs:
 
   chatgot_build:
     name: Build ChatGPT
-    needs: code-analysis-and-testing
+    needs: needs.code-analysis-and-testing.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
