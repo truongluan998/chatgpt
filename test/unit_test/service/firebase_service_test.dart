@@ -5,6 +5,7 @@ import 'package:mock_project/src/models/auth/user_model.dart';
 import 'package:mock_project/src/services/firebase/auth/auth_service.dart';
 import 'package:mock_project/src/services/firebase/auth/auth_service_impl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
 
@@ -89,23 +90,12 @@ Future<void> main() async {
   });
 
   test('should return true if user is successfully created', () async {
-
-    
-    // Arrange
     final mockUser = MockFirebaseUser();
-    final email = 'test@test.com';
-    final password = 'password';
-    final name = 'Test User';
-    final phone = '1234567890';
+    const email = 'test@test.com';
+    const password = 'password';
+    const name = 'Test User';
+    const phone = '1234567890';
 
-    final mockUserModel = UserModel(
-      id: '123',
-      email: 'test@test.com',
-      name: 'John Doe',
-      phone: '555-555-5555',
-      photo: '',
-      password: 'password',
-    );
     final userCredentialMock = UserCredentialMock();
     when(() => mockFirebaseAuth.fetchSignInMethodsForEmail(email))
         .thenAnswer((_) => Future.value([]));
@@ -114,18 +104,42 @@ Future<void> main() async {
             email: email, password: password))
         .thenAnswer((_) => Future.value(userCredentialMock));
     when(() => userCredentialMock.user).thenReturn(mockUser);
-    when(() => mockUser.email).thenReturn(email);
-    when(() => mockUser.uid).thenReturn('123456');
-    when(() => mockUser.displayName).thenReturn(name);
-    when(() => mockUser.phoneNumber).thenReturn(phone);
-    when(() => mockCollectionReference
-        .doc(userCredentialMock.user!.uid)
-        .set(mockUserModel.toJson())).thenAnswer((_) => Future.value());
+    when(() => mockUser.uid).thenReturn('123123');
+    // verify(mockCollectionReference.doc(mockUser.uid).set(any()) as Function());
 
     final result = await authServiceImpl.signUp(
         email: email, password: password, name: name, phone: phone);
 
     // Assert
     expect(result, true);
+  });
+
+  test('should return true if user is login ', () async {
+    final mockUser = MockFirebaseUser();
+    const email = 'test@test.com';
+    const password = 'password';
+  
+
+    final userCredentialMock = UserCredentialMock();
+    when(() => mockFirebaseAuth.fetchSignInMethodsForEmail(email))
+        .thenAnswer((_) => Future.value([]));
+
+    when(() => mockFirebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password))
+        .thenAnswer((_) => Future.value(userCredentialMock));
+    when(() => userCredentialMock.user).thenReturn(mockUser);
+
+    final result = await authServiceImpl.signInWithEmailAndPassword(
+        email: email, password: password);
+
+    // Assert
+    expect(result, isNotNull);
+  });
+
+  test('should return true if user is logout ', () async {
+    when(() => mockFirebaseAuth.signOut())
+        .thenAnswer((_) => Future.value(true));
+    final result = await authServiceImpl.logout();
+    expect(result, isNotNull);
   });
 }
