@@ -4,8 +4,29 @@ on:
     brand:
       - develop
 jobs:
+  code-analysis-and-testing:
+    if: false
+    name: Code analysis and testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.7'
+          channel: stable
+      - name: Get pub dependencies
+        run: flutter pub get
+      - name: Flutter analyze
+        run: flutter analyze
+      - name: Flutter test
+        run: flutter test
+
   android_build:
     name: Build ChatGPT
+    needs: code-analysis-and-testing
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -25,8 +46,6 @@ jobs:
         with:
           name: release-android-app
           path: build/app/outputs/flutter-apk/app-release.apk
-      - name: Zip APK file
-        run: zip -j app-release.zip build/app/outputs/flutter-apk/app-release.apk
       - uses: dawidd6/action-send-mail@v2
         if: always()
         with:
@@ -37,6 +56,4 @@ jobs:
           subject: ${{ github.repository }} ${{ github.job }} is ${{ job.status }}
           body: 'Build complete'
           to: truongluan998@gmail.com, binhp1999@gmail.com
-          from: ChatGPT  
-          attachments: |
-            app-release.zip
+          from: ChatGPT
