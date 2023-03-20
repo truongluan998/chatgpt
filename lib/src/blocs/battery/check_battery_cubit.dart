@@ -14,7 +14,7 @@ class CheckBatteryCubit extends Cubit<CheckBatteryState> {
 
   Future<void> checkBattery() async {
     try {
-      _timer = Timer.periodic(const Duration(seconds: 60), (timer) async {
+      _timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
         emit(const CheckBatteryState.batteryInitial());
         final batteryLevel = await _batteryPluginImp.getBatteryLevel();
         final batteryState = await _batteryPluginImp.batteryState();
