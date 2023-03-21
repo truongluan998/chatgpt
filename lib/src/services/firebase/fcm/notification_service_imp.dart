@@ -18,8 +18,9 @@ class NotificationServiceImp extends NotificationService {
 
   @override
   Future<void> initializeFCM() async {
-    await _configureLocalTimeZone();
+    // await _configureLocalTimeZone();
     await _configFirebaseMessageForAndroid();
+    await getToken();
   }
 
   @override
