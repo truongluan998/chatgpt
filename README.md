@@ -132,7 +132,7 @@ Now, lets dive into the lib folder which has the main code for the application.
 3- constants - All the application level constants are defined in this directory with-in their respective files. This directory contains the constants for `theme`, `dimentions`, `api endpoints`, `preferences` and `strings`.
 4- models - Contains all models to get and save data from BE.
 5- routes - This file contains all the routes for your application.
-6- screens - Contants all screens and widget. For example, Login Screen, button, textfield etc,...
+6- screens - Contains all screens and widget. For example, Login Screen, button, textfield etc,...
 7- services - Contains all the business logic that performs server related tasks such as retrieving data from BE, saving data, displaying notifications, etc..
 8- theme - Contains Application color and theme. For example, text color, button color, text size, button style etc,...
 9- utils - Contains the utilities/common functions of your application.
@@ -175,7 +175,7 @@ constants/
 |- enum.dart
 ```
 
-### Constants
+### Models
 
 This directory contains all models to get and save data from BE. A separate file is created for each type as shown in example below:
 
@@ -198,3 +198,139 @@ models/
     |- chat_model.g.dart
 |- model_dependencies.dart  
 ```
+
+### Routes
+
+This file contains all the routes for your application. A separate file is created for each type as shown in example below:
+
+```
+routes/
+|- app_router.dart
+|- app_router.gr.dart
+|- auth_guard.dart
+```
+
+### Screens
+
+this file contains all screens and widget. For example, Login Screen, button, textfield etc,.... A separate file is created for each type as shown in example below:
+
+```
+screens/
+|- auth/
+    |- widget
+        |- login_with_social_button.dart
+    |- sign_in_page.dart
+    |- sign_up_page.dart
+|- home/
+    |- home_page.dart
+|- profile/
+    |- widgets
+        |- custon_column_infor_profile.dart
+        |- vertical_divider_profile.dart
+    |- profile_page.dart
+|- widgets/
+    |- app_elevated_button.dart
+    |- app_message_widget.dart
+    |- app_text.dart
+    |- app_text_form_field.dart
+    |- avatar_chat_widget.dart
+    |- blur_loading.dart
+```
+
+### Services
+
+Contains all the business logic that performs server related tasks such as retrieving data from BE, saving data, displaying notifications, etc... A separate file is created for each type as shown in example below:
+
+```
+services/
+|- base/
+    |- base_service.dart
+|- chatgpt/
+    |- chatgpt_service.dart
+|- firebase/
+    |- auth/
+        |- auth_service.dart
+        |- auth_service_impl.dart
+    |- fcm/
+        |- notification_service.dart
+        |- notification_service_impl.dart
+|- service_dependencies.dart
+```
+
+### Theme
+
+Contains Application color and theme. For example, text color, button color, text size, button style etc,... A separate file is created for each type as shown in example below:
+
+```
+theme/
+|- app_color.dart
+|- app_theme.dart
+```
+
+### Utils
+
+Contains the utilities/common functions of your application. A separate file is created for each type as shown in example below:
+
+```
+utils/
+|- network/
+    |- interceptor.dart
+|- app_configuration.dart
+|- show_toast.dart
+|- validator.dart
+```
+
+### Unit Test
+
+Unite Test. A separate file is created for each type as shown in example below:
+
+```
+test/
+|- mock_data/
+    |- firebase_cloud.dart
+    |- mock_data_reponse_model_chatgpt.dart
+    |- mocl_data_reponse_reply_chatgpt.dart
+|- unit_test/
+    |- blocs/
+        |- auth/ 
+            |- authentication_cubit_test.dart
+        |- battery/
+            |- check_battery_cubit_test.dart
+        |- connectivity/
+            |- connectivity_cubit_test.dart
+    |- service/
+        |- base_service_test.dart
+        |- chatgpt_service_test.dart
+        |- firebase_messaging_test.dart
+        |- firebase_service_test.dart
+    |- utils/
+        |- interceptor_chatgpt_test.dart
+        |- validate_test.dart
+|- widget_test/
+    |- auth/
+        |- login_with_social_button_test.dart
+        |- sign_in_page_test.dart
+        |- sign_up_page_test.dart
+    |- home/
+        |- home_page_test.dart
+    |- profile/
+        |- custom_column_infor_profile_test.dart
+        |- profile_page_test.dart
+        |- vertical_divider_profile_test.dart
+    |- widget/
+        |- app_elevated_button_test.dart
+        |- app_mesage_widget_test.dart
+        |- app_text_form_field_test.dart
+        |- app_text_test.dart
+        |- avatar_chat_widget_test.dart
+        |- blur_loading_test.dart
+|- coverage_generate_file.dart
+```
+
+## Conclusion
+
+This is a safe project, no code leaks are allowed.
+
+Thank you to everyone who has worked hard to contribute to the project, and Mr. Son for his enthusiastic support and guidance.
+
+Thank you.
