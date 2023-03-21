@@ -4,10 +4,12 @@ import 'package:mock_project/src/screens/profile/profile_page.dart';
 import 'package:mock_project/src/screens/profile/widgets/custom_column_infor_profile.dart';
 import 'package:mock_project/src/screens/profile/widgets/vertical_divider_profile.dart';
 import 'package:mock_project/src/screens/widgets/app_text.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 
 void main() {
-  const widget = MaterialApp(
-    home: ProfilePage(),
+  final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
+    home: const ProfilePage(),
   );
 
   testWidgets('ProfilePage should have [Column] Column', (tester) async {

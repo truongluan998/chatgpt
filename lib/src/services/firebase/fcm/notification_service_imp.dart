@@ -11,8 +11,7 @@ class NotificationServiceImp extends NotificationService {
   final FirebaseMessaging _firebaseMessaging;
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  NotificationServiceImp(FirebaseMessaging? firebaseMessaging)
-      : _firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
+  NotificationServiceImp(FirebaseMessaging? firebaseMessaging) : _firebaseMessaging = firebaseMessaging ?? FirebaseMessaging.instance;
 
   @override
   Future<String?> getToken() async => await _firebaseMessaging.getToken() ?? '';

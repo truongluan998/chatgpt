@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_project/src/screens/widgets/app_text_form_field.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
+import 'package:mock_project/src/utils/validator.dart';
 
 void main() {
   final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
     home: Scaffold(
       body: AppTextFormField(
+       
         textEditingController: TextEditingController(),
       ),
     ),

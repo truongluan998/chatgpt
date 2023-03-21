@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_project/src/screens/widgets/avatar_chat_widget.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 
 void main() {
-  const widget = MaterialApp(
-    home: Scaffold(
+  final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
+    home: const Scaffold(
       body: AvatarChatWidget(
         checkLastMessage: true,
       ),

@@ -35,7 +35,7 @@ class CheckBatteryCubit extends Cubit<CheckBatteryState> {
           emit(const CheckBatteryState.normalBattery());
         }
       });
-    } on Exception catch (e) {
+    } catch (e) {
       emit(CheckBatteryState.errorBattery(message: e.toString()));
     }
   }
