@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_project/src/screens/auth/widget/login_with_social_button.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 
 void main() {
   final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
     home: Scaffold(
       body: LoginWithSocialButton(press: () {}, icon: Icons.verified_user),
     ),

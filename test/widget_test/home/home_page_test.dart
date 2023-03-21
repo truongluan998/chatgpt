@@ -9,6 +9,7 @@ import 'package:mock_project/src/blocs/chat/chat_cubit.dart';
 import 'package:mock_project/src/blocs/chat/chat_state.dart';
 import 'package:mock_project/src/models/model_chatgpt/chat_model.dart';
 import 'package:mock_project/src/screens/home/home_page.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../mock_data/firebase_cloud.dart';
@@ -39,6 +40,7 @@ void main() async {
   });
 
   final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
     home: BlocProvider(
       create: (context) => chatCubit,
       child: const HomePage(),

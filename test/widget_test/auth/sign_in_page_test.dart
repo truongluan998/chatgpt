@@ -7,9 +7,11 @@ import 'package:mock_project/src/app_dependencies.dart';
 import 'package:mock_project/src/blocs/authentication/authentication_cubit.dart';
 import 'package:mock_project/src/blocs/authentication/authentication_state.dart';
 import 'package:mock_project/src/constants/app_constants.dart';
+import 'package:mock_project/src/routes/app_router.dart';
 import 'package:mock_project/src/screens/auth/sign_in_page.dart';
 import 'package:mock_project/src/screens/auth/widget/login_with_social_button.dart';
 import 'package:mock_project/src/screens/widgets/app_text_form_field.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -18,6 +20,8 @@ import '../../mock_data/firebase_cloud.dart';
 class MockAuthenticationCubit extends Mock implements AuthenticationCubit {}
 
 class FakeAuthenticationState extends Fake implements AuthenticationState {}
+
+class MockAppRouter extends Mock implements AppRouter {}
 
 void main() async {
   setupFirebaseAuthMocks();
@@ -33,6 +37,7 @@ void main() async {
   });
 
   final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
     builder: (context, child) => ResponsiveWrapper.builder(
       BouncingScrollWrapper.builder(context, child!),
       breakpoints: [
@@ -98,4 +103,5 @@ void main() async {
     await tester.pump();
     expect(find.byType(LoginWithSocialButton), findsAtLeastNWidgets(3));
   });
+  
 }

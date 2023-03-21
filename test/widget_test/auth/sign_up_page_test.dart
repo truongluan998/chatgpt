@@ -9,6 +9,7 @@ import 'package:mock_project/src/constants/app_constants.dart';
 import 'package:mock_project/src/screens/auth/sign_up_page.dart';
 import 'package:mock_project/src/screens/auth/widget/login_with_social_button.dart';
 import 'package:mock_project/src/screens/widgets/app_text_form_field.dart';
+import 'package:mock_project/src/theme/app_theme.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -32,6 +33,7 @@ void main() async {
   });
 
   final widget = MaterialApp(
+    theme: AppTheme.buildTheme(),
     builder: (context, child) => ResponsiveWrapper.builder(
       BouncingScrollWrapper.builder(context, child!),
       breakpoints: [

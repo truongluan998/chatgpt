@@ -12,8 +12,8 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:rest_utils/rest_utils.dart';
 
-import '../../mock_data/mock_data_aaaaaaa.dart';
-import '../../mock_data/mock_data_chatgpt.dart';
+import '../../mock_data/mock_data_reponse_reply_chatgpt.dart';
+import '../../mock_data/mock_data_reponse_model_chatgpt.dart';
 
 class MockRestUtils extends Mock implements RestUtil {}
 
@@ -49,16 +49,14 @@ Future<void> main() async {
 
   // test('chatWithChatGPT', () async {
   //   when(
-  //     () => restUtils.request<ChatGPTRequest,ChatGPTResponse>(
-  //       '/completions',
+  //     () => restUtils.request(
+  //       any(),
   //       Method.post,
-  //       request: request,
   //     ),
-  //   ).thenAnswer((_) async => mockChatGPTResponse);
+  //   ).thenAnswer((_) async => Future.value(mockModelResponse));
 
   //   final response = await chatGPTService.chatWithChatGPT(
   //       prompt: request.prompt!, maxTokens: request.maxTokens);
-  //   verify(restUtils.request('/completions', Method.post, request: request));
   //   expect(response, isNotNull);
   // });
 
