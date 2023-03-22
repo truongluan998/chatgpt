@@ -329,7 +329,7 @@ Check the coverage of test:
 
 Open file execute_unit_tests.sh -> click run at line 1
 
-![](../../Desktop/Screenshot 2023-03-22 at 09.20.18.png)
+<img width="743" alt="Screenshot 2023-03-22 at 09 20 18" src="https://user-images.githubusercontent.com/63274798/226788014-1b21fcab-2e0a-457d-b0a8-9b2e194f901b.png">
 
 
 ### CI CD
