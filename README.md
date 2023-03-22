@@ -87,6 +87,11 @@ flutter run
 * [bloc_test](https://pub.dev/packages/bloc_test)
 * [firebase_auth_mocks](https://pub.dev/packages/firebase_auth_mocks)
 
+
+### Project Architecture in project
+
+[Untitled Diagram.drawio.pdf](https://github.com/truongluan998/chatgpt/files/11036252/Untitled.Diagram.drawio.pdf)
+
 ### Folder Structure
 Here is the core folder structure which flutter provides.
 
