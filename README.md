@@ -37,11 +37,7 @@ flutter run
 
 ## ChatGPT-App Features:
 
-* Splash
-* Home
-* Routing
-* Theme
-* Dio
+* Chat with ChatGPT API
 * Flutter Bloc (State Management)
 * Firebase Authentication
 * Firebase Storage
@@ -280,9 +276,9 @@ utils/
 |- validator.dart
 ```
 
-### Unit Test
+### Unit Test and Widget Test
 
-Unite Test. A separate file is created for each type as shown in example below:
+Running unit test and widget test will ensure that our code will still run properly even if in the future we add features or modify its existing features. A separate file is created for each type as shown in example below:
 
 ```
 test/
@@ -325,6 +321,27 @@ test/
         |- avatar_chat_widget_test.dart
         |- blur_loading_test.dart
 |- coverage_generate_file.dart
+```
+
+**Coverage Test**
+
+Check the coverage of test:
+
+Open file execute_unit_tests.sh -> click run at line 1
+
+![](../../Desktop/Screenshot 2023-03-22 at 09.20.18.png)
+
+
+### CI CD
+
+CI/CD is simply understood as the continuous working process and automation of the software. For continuous testing, the CI CD needs to be integrated into the software development lifecycle.
+
+**How to CI CD works in project**
+
+```
+Step 1: Create pull request for branch develop -> CI CD run
+Step 2: Run job Code analysis and testing -> Pass all test -> run step 3
+Step 3: Run job Build ChatGPT
 ```
 
 ## Conclusion
