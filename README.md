@@ -92,6 +92,8 @@ flutter run
 
 [Untitled Diagram.drawio.pdf](https://github.com/truongluan998/chatgpt/files/11036252/Untitled.Diagram.drawio.pdf)
 
+<img width="891" alt="Screenshot 2023-03-22 at 11 37 25" src="https://user-images.githubusercontent.com/63274798/226803515-596abb69-0064-424f-b2bc-73ef331b7051.png">
+
 ### Folder Structure
 Here is the core folder structure which flutter provides.
 
