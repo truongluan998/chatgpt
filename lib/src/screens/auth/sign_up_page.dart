@@ -90,12 +90,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: AppTextFormField(
                                     textEditingController: _fullNameController,
                                     hintText: 'full_name'.tr(),
+                                    iconData: Icons.person,
                                   ),
                                 ),
                                 ResponsiveRowColumnItem(
                                   child: AppTextFormField(
                                     textEditingController: _emailController,
                                     hintText: 'email'.tr(),
+                                    iconData: Icons.email_outlined,
                                   ),
                                 ),
                               ],
@@ -113,12 +115,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                     textEditingController: _passwordController,
                                     hintText: 'password'.tr(),
                                     obscureText: true,
+                                    iconData: Icons.password,
                                   ),
                                 ),
                                 ResponsiveRowColumnItem(
                                   child: AppTextFormField(
                                     textEditingController: _phoneController,
                                     hintText: 'phone'.tr(),
+                                    iconData: Icons.phone,
                                   ),
                                 ),
                               ],

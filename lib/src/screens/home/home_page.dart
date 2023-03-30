@@ -217,6 +217,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                           elevation: DimensionConstants.size_0,
                           textEditingController: _textEditingController,
                           hintText: 'hint_text_input_chat_page'.tr(),
+                          iconData: Icons.chat,
                         ),
                       ),
                       Container(

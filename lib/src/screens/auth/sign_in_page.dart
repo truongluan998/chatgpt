@@ -78,6 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                           child: AppTextFormField(
                             textEditingController: _emailController,
                             hintText: 'email'.tr(),
+                            iconData: Icons.email_outlined,
                           ),
                         ),
                         ResponsiveRowColumnItem(
@@ -85,6 +86,7 @@ class _SignInPageState extends State<SignInPage> {
                             textEditingController: _passwordController,
                             hintText: 'password'.tr(),
                             obscureText: true,
+                            iconData: Icons.password,
                           ),
                         ),
                       ],

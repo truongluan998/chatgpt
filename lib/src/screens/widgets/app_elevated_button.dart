@@ -24,7 +24,7 @@ class AppElevatedButton extends StatelessWidget {
         onPressed: press,
         child: Padding(
           padding: padding!,
-          child: Text(text),
+          child: FittedBox(child: Text(text)),
         ),
       ),
     );
