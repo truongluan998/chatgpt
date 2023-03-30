@@ -17,6 +17,7 @@ Download or clone this repo by using the link below:
 
 ```
 https://github.com/truongluan998/chatgpt.git (develop branch)
+
 ```
 
 **Step 2:**
@@ -92,7 +93,7 @@ flutter run
 
 [Untitled Diagram.drawio.pdf](https://github.com/truongluan998/chatgpt/files/11036252/Untitled.Diagram.drawio.pdf)
 
-<img width="891" alt="Screenshot 2023-03-22 at 11 37 25" src="https://user-images.githubusercontent.com/63274798/226803515-596abb69-0064-424f-b2bc-73ef331b7051.png">
+<img width="1005" alt="Screenshot 2023-03-30 at 08 52 49" src="https://user-images.githubusercontent.com/63274798/228707835-dcf43e06-9db9-4638-a2e0-6cc232115933.png">
 
 ### Folder Structure
 Here is the core folder structure which flutter provides.
