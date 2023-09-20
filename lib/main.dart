@@ -4,12 +4,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:mock_project/src/services/firebase/fcm/nofitication_service.dart';
 
 import 'firebase_options.dart';
 import 'src/app_dependencies.dart';
 import 'src/chatgpt.dart';
 import 'src/constants/app_constants.dart';
+import 'src/services/firebase/fcm/nofitication_service.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
