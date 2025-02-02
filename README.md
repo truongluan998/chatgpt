@@ -361,8 +361,6 @@ https://user-images.githubusercontent.com/63274798/226804986-38899b02-f9ff-4afc-
 
 ## Conclusion
 
-This is a safe project, no code leaks are allowed.
-
 Thank you to everyone who has worked hard to contribute to the project, and Mr. Son for his enthusiastic support and guidance.
 
 Thank you.
